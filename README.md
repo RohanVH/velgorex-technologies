@@ -1,5 +1,5 @@
 <div align="center">
-<img width="1200" height="600" alt="VBanner" src="./Brand.png" />
+<img width="1200" height="800" alt="VBanner" src="./Brand.png" />
 </div>
 
 # Run and deploy your app
