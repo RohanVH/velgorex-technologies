@@ -1,9 +1,8 @@
 <div align="center">
 <img width="1000" height="850" alt="VBanner" src="./Brand.png" />
 </div>
-
 # Velgorex Technologies Website
-
+### Website Live: www.velgorex.com
 A premium, cinematic portfolio website developed for **Velgorex Technologies**.
 
 ---
@@ -70,7 +69,7 @@ Velgorex Technologies
 
 ---
 
-## 🚀 Development Notes
+##  Development Notes
 
 This project focuses on combining:
 - modern UI/UX principles  
