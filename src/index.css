@@ -1,0 +1,110 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Space Grotesk", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  
+  --color-brand-blue: #00AEEF;
+  --color-brand-glow: #1E90FF;
+  --color-brand-deep: #0A1F44;
+  --color-brand-gold: #CFA75B;
+  --color-brand-gold-light: #E6B96A;
+  
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-pulse-slow: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+  100% { transform: translateY(0px); }
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+@layer base {
+  html, body {
+    @apply bg-[#030303] text-white selection:bg-brand-blue/30 selection:text-white antialiased overflow-x-hidden font-sans font-light;
+    touch-action: pan-y;
+    -webkit-overflow-scrolling: touch;
+    background-image: 
+      radial-gradient(at 0% 0%, rgba(0, 174, 239, 0.05) 0px, transparent 50%);
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.04;
+    z-index: 9999;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  }
+  
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+@layer utilities {
+  .glass {
+    @apply bg-white/5 backdrop-blur-md border border-white/10;
+  }
+  
+  .glass-premium {
+    @apply bg-[#0A1F44]/20 backdrop-blur-xl border border-brand-blue/20 shadow-[0_0_30px_rgba(0,174,239,0.1)];
+  }
+
+  .code-window {
+    @apply bg-[#050505] border border-white/10 rounded-lg overflow-hidden shadow-2xl shadow-blue-500/5;
+  }
+
+  .btn-gold {
+    @apply px-10 py-4 rounded-sm bg-brand-gold text-[#000000] font-bold text-xs uppercase tracking-widest hover:bg-brand-gold-light hover:shadow-[0_0_20px_rgba(230,185,106,0.4)] transition-all duration-500;
+  }
+
+  .btn-outline {
+    @apply px-10 py-4 rounded-sm border border-white/20 text-white font-bold text-xs uppercase tracking-widest hover:bg-white/5 transition-all duration-500;
+  }
+
+  .text-glow-blue {
+    text-shadow: 0 0 20px rgba(0, 174, 239, 0.5);
+  }
+
+  .text-glow-gold {
+    text-shadow: 0 0 20px rgba(207, 167, 91, 0.5);
+  }
+  
+  .text-gradient-gold {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-brand-gold via-brand-gold-light to-brand-gold;
+  }
+
+  .bg-gradient-brand {
+    @apply bg-gradient-to-br from-brand-blue via-brand-deep to-brand-gold;
+  }
+
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-black;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-white/20 rounded-full hover:bg-white/40 transition-colors;
+}
