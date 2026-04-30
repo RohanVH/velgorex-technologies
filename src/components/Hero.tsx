@@ -8,8 +8,10 @@ import * as THREE from 'three';
 const ParticleField = ({ color = "#00AEEF" }: { color?: string }) => {
   const ref = useRef<any>(null);
   const [sphere] = useState(() => {
-    const positions = new Float32Array(2000 * 3);
-    for (let i = 0; i < 2000; i++) {
+    const isMobile = window.innerWidth < 768;
+    const count = isMobile ? 800 : 2000;
+    const positions = new Float32Array(count * 3);
+    for (let i = 0; i < count; i++) {
       const r = 10;
       const theta = 2 * Math.PI * Math.random();
       const phi = Math.acos(2 * Math.random() - 1);
@@ -45,24 +47,22 @@ const ParticleField = ({ color = "#00AEEF" }: { color?: string }) => {
 
 const AtmosphericGlow = () => {
   return (
-    <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+    <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none" style={{ transform: 'translateZ(0)' }}>
       <motion.div 
         animate={{ 
           opacity: [0.1, 0.2, 0.1],
-          scale: [1, 1.2, 1],
           x: [-20, 20, -20],
         }}
         transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute top-[-20%] left-[-10%] w-[80%] h-[80%] bg-brand-blue/10 blur-[150px] rounded-full mix-blend-screen"
+        className="absolute top-[-20%] left-[-10%] w-[80%] h-[80%] bg-brand-blue/10 blur-[60px] md:blur-[150px] rounded-full mix-blend-screen will-change-transform"
       />
       <motion.div 
         animate={{ 
           opacity: [0.05, 0.15, 0.05],
-          scale: [1.2, 1, 1.2],
           x: [20, -20, 20],
         }}
         transition={{ duration: 15, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-        className="absolute bottom-[-30%] right-[-10%] w-[90%] h-[90%] bg-brand-blue/5 blur-[180px] rounded-full mix-blend-screen"
+        className="absolute bottom-[-30%] right-[-10%] w-[90%] h-[90%] bg-brand-blue/5 blur-[80px] md:blur-[180px] rounded-full mix-blend-screen will-change-transform"
       />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[radial-gradient(circle_at_center,transparent_0%,#000_100%)] z-10" />
     </div>
@@ -99,7 +99,8 @@ const Hero = () => {
     <section className="relative min-h-[100svh] w-full flex items-center justify-center overflow-hidden py-10 md:py-16" 
              style={{ 
                touchAction: 'pan-y',
-               background: '#000'
+               background: '#000',
+               contain: 'paint'
              }}>
       
       {/* Cinematic Background Elements */}
@@ -115,7 +116,7 @@ const Hero = () => {
         <AtmosphericGlow />
 
         {/* Framing Glowing Orbs (Blue & Gold Combo) - Increased Visibility */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-7xl h-full pointer-events-none z-10">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-7xl h-full pointer-events-none z-10" style={{ transform: 'translateZ(0)' }}>
           {/* Left Side Side Orbs */}
           <motion.div 
             animate={{ 
@@ -124,7 +125,7 @@ const Hero = () => {
               scale: [1, 1.2, 1]
             }}
             transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute top-[10%] -left-[15%] w-80 h-80 md:w-[600px] md:h-[600px] bg-[#00AEEF]/30 blur-[120px] md:blur-[200px] rounded-full"
+            className="absolute top-[10%] -left-[15%] w-80 h-80 md:w-[600px] md:h-[600px] bg-[#00AEEF]/20 blur-[60px] md:blur-[200px] rounded-full will-change-transform"
           />
           <motion.div 
             animate={{ 
@@ -133,7 +134,7 @@ const Hero = () => {
               scale: [1.2, 1, 1.2]
             }}
             transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-            className="absolute bottom-[5%] -left-[10%] w-64 h-64 md:w-[450px] md:h-[450px] bg-[#CFA75B]/25 blur-[100px] md:blur-[160px] rounded-full"
+            className="absolute bottom-[5%] -left-[10%] w-64 h-64 md:w-[450px] md:h-[450px] bg-[#CFA75B]/15 blur-[50px] md:blur-[160px] rounded-full will-change-transform"
           />
 
           {/* Right Side Side Orbs */}
@@ -144,7 +145,7 @@ const Hero = () => {
               scale: [1, 1.3, 1]
             }}
             transition={{ duration: 9, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-            className="absolute top-[5%] -right-[15%] w-72 h-72 md:w-[550px] md:h-[550px] bg-[#E6B96A]/25 blur-[110px] md:blur-[180px] rounded-full"
+            className="absolute top-[5%] -right-[15%] w-72 h-72 md:w-[550px] md:h-[550px] bg-[#E6B96A]/15 blur-[60px] md:blur-[180px] rounded-full will-change-transform"
           />
           <motion.div 
             animate={{ 
@@ -153,7 +154,7 @@ const Hero = () => {
               scale: [1.3, 1, 1.3]
             }}
             transition={{ duration: 11, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
-            className="absolute bottom-[10%] -right-[10%] w-80 h-80 md:w-[600px] md:h-[600px] bg-[#1E90FF]/30 blur-[120px] md:blur-[200px] rounded-full"
+            className="absolute bottom-[10%] -right-[10%] w-80 h-80 md:w-[600px] md:h-[600px] bg-[#1E90FF]/20 blur-[60px] md:blur-[200px] rounded-full will-change-transform"
           />
         </div>
 
@@ -163,10 +164,9 @@ const Hero = () => {
           <motion.div 
             animate={{ 
               opacity: [0.3, 0.5, 0.3],
-              scale: [1, 1.1, 1]
             }}
             transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute bottom-[-20%] left-1/2 -translate-x-1/2 w-[120%] h-[150%] bg-gradient-to-t from-[#CFA75B]/20 via-[#E6B96A]/5 to-transparent blur-[100px] rounded-[100%]"
+            className="absolute bottom-[-20%] left-1/2 -translate-x-1/2 w-[120%] h-[150%] bg-gradient-to-t from-[#CFA75B]/15 via-[#E6B96A]/5 to-transparent blur-[50px] md:blur-[100px] rounded-[100%] will-change-transform"
           />
           
           {/* Fog Layer */}
@@ -191,16 +191,16 @@ const Hero = () => {
         <div className="absolute inset-0 opacity-[0.02] mix-blend-overlay z-20" 
              style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }} />
         
-        {/* Scanning Light Line */}
+        {/* Scanning Light Line - Only on Desktop to save mobile GPU */}
         <motion.div
           animate={{ y: ["-100%", "200%"] }}
           transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-          className="absolute left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-brand-blue/20 to-transparent z-10"
+          className="absolute left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-brand-blue/20 to-transparent z-10 hidden md:block"
         />
       </div>
 
       {/* Content Layer */}
-      <div className="hero-content-main container mx-auto px-6 relative z-20 flex flex-col items-center justify-center">
+      <div className="hero-content-main container mx-auto px-6 relative z-20 flex flex-col items-center justify-center" style={{ transform: 'translateZ(0)' }}>
         <motion.div 
           initial={{ scale: 0.9, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
@@ -239,6 +239,8 @@ const Hero = () => {
                 backgroundSize: "300% 100%",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
+                transform: 'translateZ(0)',
+                willChange: 'background-position'
               }}
               animate={{ 
                 backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
@@ -263,6 +265,8 @@ const Hero = () => {
                 backgroundSize: "300% 100%",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
+                transform: 'translateZ(0)',
+                willChange: 'background-position'
               }}
               animate={{ 
                 backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
