@@ -92,7 +92,7 @@ const Footer = () => {
             <div className="flex justify-center md:justify-start gap-4">
               {[
                 { Icon: Twitter, url: '#' },
-                { Icon: Linkedin, url: '#' },
+                { Icon: Linkedin, url: 'https://www.linkedin.com/company/velgorex' },
                 { Icon: Github, url: '#' },
                 { Icon: Instagram, url: 'https://www.instagram.com/velgorex_technologies/' }
               ].map((social, i) => (
