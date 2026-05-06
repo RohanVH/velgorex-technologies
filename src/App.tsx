@@ -41,7 +41,8 @@ const ScrollToTop = () => {
 
 const Home = () => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [isIntroComplete, setIsIntroComplete] = useState(false);
+  const [isIntroComplete, setIsIntroComplete] = useState(true);
+  // here i have made the changes from false -> true.
 
   useEffect(() => {
     if (!isIntroComplete) return;
