@@ -90,7 +90,8 @@ const Home = () => {
   return (
     <div ref={containerRef} className="w-full">
       <SEO />
-      <CinematicIntro onComplete={() => setIsIntroComplete(true)} />
+      {/* <CinematicIntro onComplete={() => setIsIntroComplete(true)} /> */}
+      {/* here i have done the changes */}
 
       <motion.div 
         initial={{ opacity: 0 }}
