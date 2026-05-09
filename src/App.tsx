@@ -38,8 +38,8 @@ const ScrollToTop = () => {
 const Home = () => {
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // Intro disabled temporarily for faster indexing
-  const [isIntroComplete] = useState(true);
+  // to turn of rhe inteo chamge false to true
+  const [isIntroComplete] = useState(false);
 
   useEffect(() => {
     if (!isIntroComplete) return;
